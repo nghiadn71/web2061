@@ -15,6 +15,7 @@ const Student = {
                     `
                     <div>
                         <div>ID: ${student.id} </div>
+                        <div>Ngày tạo: ${student.createdAt} </div>
                         <div>Name: ${student.name} </div>
                         <div>MSV: ${student.msv} </div>
                     </div>
