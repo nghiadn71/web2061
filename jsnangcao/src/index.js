@@ -5,14 +5,15 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import News from './pages/News';
+import Student from './pages/Students';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Khởi tạo đối tượng router
 const router = new Navigo('/', {linksSelector: 'a'});
 
-function render (content) {
+const render = async (content) => {
     document.querySelector('#header').innerHTML = Header.render();
-    document.querySelector('#content').innerHTML = content;
+    document.querySelector('#content').innerHTML = await content;
     document.querySelector('#footer').innerHTML = Footer.render();
 }
 
@@ -20,6 +21,7 @@ router.on({
     '/': () => render(Home.render()),
     '/about': () => render(About.render()),
     '/news': () => render(News.render()),
+    '/students': () => render(Student.render()),
 });
 router.resolve();
 
@@ -122,18 +124,26 @@ const setValueA = () => new Promise((resolve, reject) => {
             reject('bị lỗi');
         }
         // a = [1, 2, 3];
-    }, 1000);
+    }, 5000);
 });
 
 let a = [];
 
-setValueA()
-    .then((data) => {data.push(4); return data})
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error));
-;
+// setValueA()
+//     .then((data) => {data.push(4); return data})
+//     .then((data) => console.log(data))
+//     .catch((error) => console.log(error));
+// ;
 
 // console.log(a);
 // async/await
 
+const printA = async () => {
+    const result = await setValueA();
 
+    console.log('Chờ result nhận kết quả rồi mới ra log này', result);
+    result.push(4);
+    console.log('Sau khi thực hiện push ra kq này', result);
+};
+
+printA();
